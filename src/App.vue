@@ -1,11 +1,33 @@
-<script setup></script>
+<script setup>
+import { RouterView } from 'vue-router';
+import Navbar from './components/NavbarComponent.vue';
+import Toast from 'primevue/toast';
+
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <header>
+    <Navbar />
+  </header>
+  <main>
+    <RouterView />
+    <Toast />
+  </main>
+  <footer></footer>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+.container .card .game-link {
+  height: 300px;
+}
+
+.game-link .card-img {
+  object-fit: fill;
+  object-position: center;
+}
+
+
+
+
+</style>

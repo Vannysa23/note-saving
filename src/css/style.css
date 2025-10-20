@@ -1,0 +1,57 @@
+@font-face {
+  font-family: 'Nunito';
+  src: url('../../public/fonts/Nunito/static/Nunito-Light.ttf');
+}
+@font-face {
+  font-family: 'Monas';
+  src: url('../../public/fonts/monas/Monas\ Demo.ttf');
+}
+
+:root {
+  --primary-color: #f49cbb;
+  --primary-color-100: #f49cbb69;
+  --danger-color: #ee6055;
+  --danger-color-100: #ee5f551a;
+  --warning-color: #ffdab9;
+  --border-color: #cddafd;
+}
+
+/* global classes */
+body {
+  background-color: #fffcf2 !important;
+  font-family: 'Nunito' !important;
+  font-weight: 500 !important;
+}
+
+.text-color {
+  color: var(--primary-color) !important;
+
+}
+.text-color-100 {
+  color: var(--primary-color-100) !important;
+}
+.border-color {
+  border-color: var(--border-color) !important;
+}
+.v-overlay__content {
+  background-color: transparent !important;
+  color: #858585 !important;
+  font-size: 14px;
+  padding: 0px !important;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #e8f0fd inset !important;
+  -webkit-text-fill-color: #2e2f30 !important;
+  transition: background-color 5000s ease-in-out;
+  border-radius: 5px;
+}
+
+.p-toast-message-success .p-toast-detail {
+    color: #22c55e !important;
+}
+
+.p-toast-message-error .p-toast-detail {
+    color: #ef4444 !important;
+}
+
