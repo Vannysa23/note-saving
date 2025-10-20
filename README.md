@@ -9,14 +9,21 @@ The idea is simple — a note-taking app where you can quickly write down though
 This template should help get you started developing with Vue 3 in Vite.
 
 ✨ What It Can Do
-📝 Add, edit, and delete notes
-⚡ Fast and responsive
-🔒 Focuses on better security — sanitizing inputs, safe data handling, etc.
-💻 Works great for quick reminders or meeting notes
-🎨 Simple and user-friendly UI
+- 📝 Add, edit, and delete notes
+- ⚡ Fast and responsive
+- 🔒 Focuses on better security — sanitizing inputs, safe data handling, etc.
+- 💻 Works great for quick reminders or meeting notes
+- 🎨 Simple and user-friendly UI
 
-##
-🚀 How to Run It
+## 🔐 Why Security?
+I wanted to go beyond just building a frontend app — so I’m experimenting with things like:
+- Cleaning up user inputs (to avoid XSS)
+- Safe localStorage usage
+- Thinking about authentication and data protection
+- Learning how small habits make a big difference in app security
+It’s a great way to practice writing secure code while building something useful.
+
+## 🚀 How to Run It
 
 If you want to check it out locally:
 
@@ -27,5 +34,5 @@ npm run serve
 
 Then open http://localhost:3000 and play around!
 
-👩‍💻 Personal Note
-This project is mainly for practice and learning.
+## 👩‍💻 Personal Note
+- This project is mainly for practice and learning.
