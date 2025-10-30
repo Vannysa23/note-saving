@@ -1,11 +1,14 @@
 import express from 'express'
-import { createUser, login, getAllUsers } from '../../controllers/userController.js'
+import axios from 'axios'
+import { createUser, login, getAllUsers, checkAuth } from '../../controllers/authController.js'
+import { authenticate } from '../../middleware/auth.js'
 
 const router = express.Router()
 
 // Create a user
 router.post('/register', createUser)
 router.post('/login', login)
+router.get('/check-auth', checkAuth)
 router.get('/allUsers', getAllUsers)
 
 // // Update a user
@@ -36,5 +39,6 @@ router.get('/allUsers', getAllUsers)
 //     res.json({ message: 'User deleted' })
 //   })
 // })
+
 
 export default router

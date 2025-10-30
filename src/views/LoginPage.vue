@@ -38,6 +38,7 @@ const [password, passwordAttrs] = defineField('password');
 
 async function submitForm() {
   try {
+    loadingMss.value = 'Login ... ';
     const userInfo = {
       username: DOMPurify.sanitize(name.value.trim()),
       email: DOMPurify.sanitize(email.value.trim()),
@@ -50,33 +51,23 @@ async function submitForm() {
     });
     if (res.data.success) {
       toast.add({ severity: 'success', summary: 'Success', detail: 'Login successful!', life: 4000 });
-      loadingMss.value = 'Login ... ';
       timeoutId = setTimeout(() => {
-
         name.value = '';
         email.value = '';
         password.value = '';
 
         router.push('/');
-      }, 5000);
+      }, 2000);
 
-      
     } else {
       toast.add({ severity: 'error', summary: 'Attempt failed', detail: 'Login failed!', life: 3000 });
     }
 
   } catch (error) {
-    if (error.response) {
-      if (error.response && error.response.data?.message?.includes('User already exists')) {
-        // setFieldError('name', 'User already Registration failed');
-        toast.add({ severity: 'error', summary: 'Attempt failed', detail: 'Registration failed!', life: 3000 });
-      }
-    } else {
-      console.error('Registration failed');
-
-    }
+    console.log(error);
+    toast.add({ severity: 'error', summary: 'Attempt failed', detail: 'Invalid credentials. Please try again!', life: 3000 });
   }
-
+  loadingMss.value = 'Login ';
   onBeforeUnmount(() => {
     if (timeoutId) clearTimeout(timeoutId);
   });
@@ -140,7 +131,7 @@ async function submitForm() {
                 <button
                   class="btn w-100 border-color text-color mt-5"
                   type="submit"
-                  :disabled="!meta.touched || meta.valid === false">
+                  :disabled="!meta.touched || meta.valid === false || loadingMss.includes('...')">
                   {{ loadingMss }}
                 </button>
               </div>

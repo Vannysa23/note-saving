@@ -5,13 +5,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import '@fortawesome/fontawesome-free/css/all.css'
 import 'vuetify/styles'
-import App from './App.vue';
-import PrimeVue from 'primevue/config';
-import Aura from '@primeuix/themes/aura';
-import ToastService from 'primevue/toastservice';
-
-
-
+import App from './App.vue'
+import PrimeVue from 'primevue/config'
+import Aura from '@primeuix/themes/aura'
+import ToastService from 'primevue/toastservice'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import 'vuetify/styles'
@@ -28,7 +25,6 @@ const vuetify = createVuetify({
   components,
   directives,
 })
-
 
 app.use(createPinia())
 app.use(vuetify);

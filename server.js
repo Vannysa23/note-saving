@@ -5,6 +5,7 @@ import cors from 'cors'
 import { sanitizedBody } from './middleware/sanitizedBody.js'
 import apiRoute from './router/api/userRoutes.js'
 
+
 const app = express();
 
 

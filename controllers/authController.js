@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs'
 import User from '../models/userModel.js'
 import { registerSchema } from '../validator/validator.js'
+import { generateAccessToken, generateRefreshToken, verifyToken } from '../utils/jwt.js';
 // import xss from 'xss'
 // import { sanitizedBody } from '../middleware/sanitizedBody.js'
 
@@ -51,12 +52,26 @@ const login = (req, res) => {
     bcrypt.compare(password, user.password, (err, isMatch) => {
       if (err) return res.status(500).json({ success: false, error: 'Internal server error' })
       if (!isMatch) return res.status(401).json({ success: false, error: 'Invalid credential!' })
+      console.log('123')
 
-      res.cookie('userId', user.id, {
+      const token = generateAccessToken(user);
+      const refreshToken = generateRefreshToken(user);
+
+      console.log(token)
+
+      res.cookie('accesstoken', token, {
         httpOnly: true,
-        // secure: true,
-        maxAge: 24 * 60 * 60 * 1000, // 1day
+        secure: true,
+        samesite : 'Strict',
+        maxAge: 24 * 60 * 1000, // 1day
       })
+      res.cookie('refreshToken', refreshToken, {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'strict',
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      });
+
       res.json({ success: true, data: 'Login successfully' })
     })
   })
@@ -73,4 +88,13 @@ const getAllUsers = (req, res) => {
   })
 }
 
-export { createUser, login, getAllUsers }
+const checkAuth = (req, res) => {
+  res.json({ success: true, user: req.user });
+}
+
+export {
+  createUser,
+  login,
+  getAllUsers,
+  checkAuth
+}
