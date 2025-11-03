@@ -1,13 +1,14 @@
 import express from 'express'
-import axios from 'axios'
-import { createUser, login, getAllUsers, checkAuth } from '../../controllers/authController.js'
-import { authenticate } from '../../middleware/auth.js'
+// import axios from 'axios'
+import { createUser, login, getAllUsers, checkAuth, logout } from '../../controllers/authController.js'
+// import { authenticate } from '../../middleware/auth.js'
 
 const router = express.Router()
 
 // Create a user
 router.post('/register', createUser)
 router.post('/login', login)
+router.delete('/logout', logout)
 router.get('/check-auth', checkAuth)
 router.get('/allUsers', getAllUsers)
 

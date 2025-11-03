@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 
+
 const tooltiptxt = ref('Copy')
 const prompt = ref('')
 const allPrompts = ref([])
@@ -31,6 +32,7 @@ function savePrompt() {
 function undoText() {
   prompt.value = ''
 }
+
 
 </script>
 

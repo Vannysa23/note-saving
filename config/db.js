@@ -1,22 +1,23 @@
 import mysql from 'mysql2'
-import dotenv from 'dotenv'
+import { config } from './env.js'
 
-// Load from project root .env if present, then fallback to server/.env
-dotenv.config()
+//old way to connect to database
+// const db = mysql.createConnection({
+//   host: process.env.DB_HOST,
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PASSWORD,
+//   database: process.env.DB_NAME,
+// })
 
+//new way to connect to database by create env file in config folder
 const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  host: config.db.host,
+  user: config.db.user,
+  password: config.db.password,
+  database: config.db.database,
 })
 
-console.log('ENV TEST:', {
-  DB_HOST: process.env.DB_HOST,
-  DB_USER: process.env.DB_USER,
-  DB_PASSWORD: process.env.DB_PASSWORD,
-  DB_NAME: process.env.DB_NAME,
-})
+
 
 db.connect((err) => {
   if (err) {

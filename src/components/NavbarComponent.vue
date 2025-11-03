@@ -1,5 +1,30 @@
 <script setup>
-import { RouterLink } from "vue-router";
+import { RouterLink, useRoute } from 'vue-router'
+import { ref, watch } from 'vue'
+import { authService } from '../services/authService.js'
+import { logout } from '../services/logout.js'
+
+const route = useRoute()
+const isAuthenticated = ref(false)
+
+const updateAuthStatus = async () => {
+  console.log(route.path)
+  if (route.path !== '/login' && route.path !== '/register') {
+    isAuthenticated.value = await authService.checkAuth()
+  } 
+}
+
+const handleLogout = async () => {
+  await logout()
+  await updateAuthStatus()
+}
+
+watch(
+  () => route.path,
+  async () => {
+    await updateAuthStatus()
+  }
+)
 </script>
 
 <template>
@@ -14,18 +39,19 @@ import { RouterLink } from "vue-router";
           <button class="btn" type="button">
             <router-link to="/me" class="nav-link active" aria-current="page">About Me</router-link>
           </button>
-          <!-- <div class="has-acc">
-            <button class="btn" type="button">
-              <router-link to="/login" class="nav-link logout-btn text-primary">Nika</router-link>
+          <!-- Authenticated User: Show Logout -->
+          <div v-if="isAuthenticated" class="has-acc">
+            <button class="btn" type="button" @click="handleLogout">
+              <span class="nav-link login-btn">Logout</span>
             </button>
-
-          </div> -->
-          <div class="no-acc">
+          </div>
+          <!-- Not Authenticated: Show Login and Register -->
+          <div v-else class="no-acc">
             <button class="btn" type="button">
               <router-link to="/register" class="nav-link login-btn">Register</router-link>
             </button>
             <button class="btn" type="button">
-              <router-link to="/login" class="nav-link login-btn" >Login</router-link>
+              <router-link to="/login" class="nav-link login-btn">Login</router-link>
             </button>
           </div>
         </ul>
@@ -40,7 +66,7 @@ import { RouterLink } from "vue-router";
   height: 25px;
 }
 .brand-name {
-  font-family: "Monas";
+  font-family: 'Monas';
   color: #fad2e1;
 }
 .btn {
@@ -51,7 +77,6 @@ import { RouterLink } from "vue-router";
   text-decoration: none;
   color: #fad2e1;
   transition: all 0.2s ease-in-out;
-
 }
 .nav-link:hover {
   color: #fda0c2;
@@ -61,7 +86,7 @@ import { RouterLink } from "vue-router";
   font-weight: 400;
   border: none !important;
 }
-.login-btn:hover{
+.login-btn:hover {
   color: #6f95fd !important;
 }
 </style>

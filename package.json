@@ -34,6 +34,7 @@
     "dompurify": "^3.3.0",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "helmet": "^8.1.0",
     "joi": "^18.0.1",
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.14.3",
@@ -43,6 +44,7 @@
     "vue": "^3.5.18",
     "vue-router": "^4.5.1",
     "vuetify": "^3.9.3",
+    "winston": "^3.18.3",
     "xss": "^1.0.15"
   },
   "devDependencies": {

@@ -7,9 +7,13 @@ import { useToast } from 'primevue/usetoast';
 import * as yup from 'yup';
 import DOMPurify from 'dompurify';
 import { onBeforeUnmount } from "vue";
+// import logger from "../../lib/logger.js";
 
 const toast = useToast();
 let timeoutId = null;
+onBeforeUnmount(() => {
+  if (timeoutId) clearTimeout(timeoutId);
+});
 let loadingMss = ref('Login');
 
 const { meta, errors, defineField } = useForm({
@@ -56,6 +60,8 @@ async function submitForm() {
         email.value = '';
         password.value = '';
 
+        // logger.info(`User logged in: ${userInfo.username} (${userInfo.email})`);
+
         router.push('/');
       }, 2000);
 
@@ -68,9 +74,6 @@ async function submitForm() {
     toast.add({ severity: 'error', summary: 'Attempt failed', detail: 'Invalid credentials. Please try again!', life: 3000 });
   }
   loadingMss.value = 'Login ';
-  onBeforeUnmount(() => {
-    if (timeoutId) clearTimeout(timeoutId);
-  });
 }
 </script>
 
